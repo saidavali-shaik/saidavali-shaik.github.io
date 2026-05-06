@@ -1,0 +1,769 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Saidavali Shaik | ML Engineer & Developer</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=DM+Mono:wght@300;400;500&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #0a0a0f;
+      --surface: #12121a;
+      --card: #1a1a26;
+      --accent: #7c6af7;
+      --accent2: #f76a8a;
+      --accent3: #6af7c8;
+      --text: #e8e8f0;
+      --muted: #888899;
+      --border: rgba(124, 106, 247, 0.2);
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 300;
+      overflow-x: hidden;
+    }
+
+    /* Animated grid background */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(124,106,247,0.04) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(124,106,247,0.04) 1px, transparent 1px);
+      background-size: 60px 60px;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    /* Glowing orbs */
+    .orb {
+      position: fixed;
+      border-radius: 50%;
+      filter: blur(80px);
+      pointer-events: none;
+      z-index: 0;
+      opacity: 0.35;
+    }
+    .orb-1 {
+      width: 500px; height: 500px;
+      background: radial-gradient(circle, #7c6af7, transparent);
+      top: -150px; left: -150px;
+      animation: drift 12s ease-in-out infinite alternate;
+    }
+    .orb-2 {
+      width: 400px; height: 400px;
+      background: radial-gradient(circle, #f76a8a, transparent);
+      bottom: 10%; right: -100px;
+      animation: drift 15s ease-in-out infinite alternate-reverse;
+    }
+    .orb-3 {
+      width: 300px; height: 300px;
+      background: radial-gradient(circle, #6af7c8, transparent);
+      top: 50%; left: 40%;
+      animation: drift 18s ease-in-out infinite alternate;
+    }
+    @keyframes drift {
+      from { transform: translate(0, 0); }
+      to { transform: translate(40px, 40px); }
+    }
+
+    /* Nav */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0;
+      z-index: 100;
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 20px 60px;
+      background: rgba(10,10,15,0.6);
+      backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--border);
+    }
+    .nav-logo {
+      font-family: 'DM Mono', monospace;
+      font-size: 14px;
+      color: var(--accent);
+      letter-spacing: 2px;
+    }
+    .nav-links { display: flex; gap: 32px; list-style: none; }
+    .nav-links a {
+      color: var(--muted);
+      text-decoration: none;
+      font-size: 13px;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      transition: color 0.3s;
+    }
+    .nav-links a:hover { color: var(--accent); }
+
+    /* Hero */
+    .hero {
+      position: relative;
+      min-height: 100vh;
+      display: flex; align-items: center;
+      padding: 120px 60px 80px;
+      z-index: 1;
+    }
+    .hero-content { max-width: 800px; }
+
+    .hero-tag {
+      display: inline-flex; align-items: center; gap: 8px;
+      font-family: 'DM Mono', monospace;
+      font-size: 12px;
+      color: var(--accent3);
+      letter-spacing: 2px;
+      margin-bottom: 28px;
+      padding: 6px 14px;
+      border: 1px solid rgba(106, 247, 200, 0.3);
+      border-radius: 20px;
+      background: rgba(106, 247, 200, 0.05);
+      animation: fadeDown 0.8s ease both;
+    }
+    .hero-tag::before {
+      content: '';
+      width: 6px; height: 6px;
+      background: var(--accent3);
+      border-radius: 50%;
+      animation: pulse 2s infinite;
+    }
+    @keyframes pulse {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.4; transform: scale(0.8); }
+    }
+
+    .hero h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(48px, 8vw, 90px);
+      line-height: 1.05;
+      margin-bottom: 24px;
+      animation: fadeUp 0.9s ease 0.2s both;
+    }
+    .hero h1 em {
+      font-style: italic;
+      color: var(--accent);
+      display: block;
+    }
+
+    .hero-desc {
+      font-size: 18px;
+      color: var(--muted);
+      line-height: 1.7;
+      max-width: 540px;
+      margin-bottom: 40px;
+      animation: fadeUp 0.9s ease 0.4s both;
+    }
+
+    .hero-btns {
+      display: flex; gap: 16px; flex-wrap: wrap;
+      animation: fadeUp 0.9s ease 0.6s both;
+    }
+    .btn {
+      padding: 14px 32px;
+      border-radius: 6px;
+      font-size: 14px;
+      font-weight: 500;
+      cursor: pointer;
+      text-decoration: none;
+      transition: all 0.3s;
+      letter-spacing: 0.5px;
+    }
+    .btn-primary {
+      background: var(--accent);
+      color: #fff;
+      border: none;
+    }
+    .btn-primary:hover {
+      background: #9b8dff;
+      transform: translateY(-2px);
+      box-shadow: 0 8px 30px rgba(124,106,247,0.4);
+    }
+    .btn-outline {
+      background: transparent;
+      color: var(--text);
+      border: 1px solid var(--border);
+    }
+    .btn-outline:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+      transform: translateY(-2px);
+    }
+
+    /* Scroll indicator */
+    .scroll-hint {
+      position: absolute; bottom: 40px; left: 60px;
+      display: flex; align-items: center; gap: 10px;
+      color: var(--muted); font-size: 12px;
+      font-family: 'DM Mono', monospace;
+      letter-spacing: 2px;
+      animation: fadeUp 1s ease 1s both;
+    }
+    .scroll-line {
+      width: 40px; height: 1px;
+      background: var(--muted);
+    }
+
+    /* Sections */
+    section {
+      position: relative; z-index: 1;
+      padding: 100px 60px;
+    }
+
+    .section-label {
+      font-family: 'DM Mono', monospace;
+      font-size: 11px;
+      color: var(--accent);
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      margin-bottom: 16px;
+    }
+    .section-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(32px, 5vw, 52px);
+      margin-bottom: 60px;
+      line-height: 1.1;
+    }
+
+    /* Skills */
+    #skills { background: var(--surface); }
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 24px;
+    }
+    .skill-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 28px;
+      transition: all 0.3s;
+      position: relative;
+      overflow: hidden;
+    }
+    .skill-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 2px;
+      background: linear-gradient(90deg, var(--accent), var(--accent2));
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 0.4s ease;
+    }
+    .skill-card:hover::before { transform: scaleX(1); }
+    .skill-card:hover {
+      transform: translateY(-4px);
+      border-color: rgba(124,106,247,0.4);
+      box-shadow: 0 16px 40px rgba(0,0,0,0.3);
+    }
+    .skill-icon {
+      font-size: 32px; margin-bottom: 16px;
+    }
+    .skill-card h3 {
+      font-size: 16px; font-weight: 500;
+      margin-bottom: 12px; color: var(--text);
+    }
+    .skill-tags {
+      display: flex; flex-wrap: wrap; gap: 8px;
+    }
+    .tag {
+      font-family: 'DM Mono', monospace;
+      font-size: 11px;
+      padding: 4px 10px;
+      border-radius: 4px;
+      background: rgba(124,106,247,0.1);
+      color: var(--accent);
+      border: 1px solid rgba(124,106,247,0.2);
+    }
+
+    /* Projects */
+    .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 28px;
+    }
+    .project-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 32px;
+      transition: all 0.3s;
+      display: flex; flex-direction: column;
+    }
+    .project-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 20px 60px rgba(0,0,0,0.4);
+      border-color: rgba(124,106,247,0.5);
+    }
+    .project-num {
+      font-family: 'DM Mono', monospace;
+      font-size: 11px;
+      color: var(--accent);
+      margin-bottom: 16px;
+      letter-spacing: 2px;
+    }
+    .project-card h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: 22px;
+      margin-bottom: 12px;
+    }
+    .project-card p {
+      color: var(--muted);
+      font-size: 14px;
+      line-height: 1.7;
+      flex: 1;
+      margin-bottom: 20px;
+    }
+    .project-footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .project-link {
+      color: var(--accent);
+      text-decoration: none;
+      font-size: 13px;
+      font-family: 'DM Mono', monospace;
+      display: flex; align-items: center; gap: 6px;
+      transition: gap 0.2s;
+    }
+    .project-link:hover { gap: 10px; }
+
+    /* Certificates */
+    #certificates { background: var(--bg); }
+    .certificates-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 28px;
+    }
+    .certificate-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 32px;
+      transition: all 0.3s;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .certificate-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 2px;
+      background: linear-gradient(90deg, var(--accent2), var(--accent3));
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 0.4s ease;
+    }
+    .certificate-card:hover::before { transform: scaleX(1); }
+    .certificate-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 20px 60px rgba(0,0,0,0.4);
+      border-color: rgba(247,106,138,0.5);
+    }
+    .certificate-image {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+      border-radius: 8px;
+      margin-bottom: 20px;
+      border: 1px solid var(--border);
+    }
+    .certificate-card h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: 20px;
+      margin-bottom: 8px;
+      color: var(--text);
+    }
+    .certificate-issuer {
+      color: var(--accent);
+      font-size: 14px;
+      font-weight: 500;
+      margin-bottom: 12px;
+    }
+    .certificate-date {
+      color: var(--muted);
+      font-size: 12px;
+      font-family: 'DM Mono', monospace;
+      margin-bottom: 20px;
+    }
+    .certificate-link {
+      color: var(--accent2);
+      text-decoration: none;
+      font-size: 13px;
+      font-family: 'DM Mono', monospace;
+      display: inline-flex; align-items: center; gap: 6px;
+      transition: gap 0.2s;
+    }
+    .certificate-link:hover { gap: 10px; }
+
+    /* About */
+    #about { background: var(--surface); }
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: center;
+    }
+    .about-text p {
+      color: var(--muted);
+      line-height: 1.8;
+      margin-bottom: 20px;
+      font-size: 15px;
+    }
+    .about-text p strong { color: var(--text); font-weight: 500; }
+    .stats {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+    }
+    .stat-box {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 24px;
+      text-align: center;
+    }
+    .stat-num {
+      font-family: 'Playfair Display', serif;
+      font-size: 42px;
+      color: var(--accent);
+      display: block;
+    }
+    .stat-label {
+      font-size: 12px;
+      color: var(--muted);
+      margin-top: 4px;
+      font-family: 'DM Mono', monospace;
+      letter-spacing: 1px;
+    }
+
+    /* Contact */
+    .contact-inner {
+      max-width: 600px;
+      margin: 0 auto;
+      text-align: center;
+    }
+    .contact-inner .section-label,
+    .contact-inner .section-title { text-align: center; }
+    .contact-inner p {
+      color: var(--muted);
+      margin-bottom: 40px;
+      font-size: 16px;
+      line-height: 1.7;
+    }
+    .contact-links {
+      display: flex;
+      justify-content: center;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+    .contact-link {
+      display: flex; align-items: center; gap: 8px;
+      padding: 14px 28px;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      color: var(--text);
+      text-decoration: none;
+      font-size: 14px;
+      transition: all 0.3s;
+      background: var(--card);
+    }
+    .contact-link:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+      transform: translateY(-3px);
+      box-shadow: 0 10px 30px rgba(124,106,247,0.2);
+    }
+
+    /* Footer */
+    footer {
+      position: relative; z-index: 1;
+      text-align: center;
+      padding: 40px;
+      border-top: 1px solid var(--border);
+      color: var(--muted);
+      font-family: 'DM Mono', monospace;
+      font-size: 12px;
+      letter-spacing: 1px;
+    }
+
+    /* Animations */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(24px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes fadeDown {
+      from { opacity: 0; transform: translateY(-16px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .reveal {
+      opacity: 0; transform: translateY(30px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+    .reveal.visible {
+      opacity: 1; transform: translateY(0);
+    }
+
+    /* Mobile */
+    @media (max-width: 768px) {
+      nav { padding: 16px 24px; }
+      .nav-links { display: none; }
+      .hero { padding: 100px 24px 80px; }
+      section { padding: 80px 24px; }
+      .about-grid { grid-template-columns: 1fr; gap: 40px; }
+      .scroll-hint { left: 24px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Orbs -->
+  <div class="orb orb-1"></div>
+  <div class="orb orb-2"></div>
+  <div class="orb orb-3"></div>
+
+  <!-- Nav -->
+  <nav>
+    <div class="nav-logo">SAIDA VALI.SHAIK</div>
+    <ul class="nav-links">
+      <li><a href="#skills">Skills</a></li>
+      <li><a href="#projects">Projects</a></li>
+      <li><a href="#certificates">Certificates</a></li>
+      <li><a href="#about">About</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </nav>
+
+  <!-- Hero -->
+  <section class="hero">
+    <div class="hero-content">
+      <div class="hero-tag">Available for Internships</div>
+      <h1>
+        Saidavali Shaik
+        <em>ML Engineer &amp; Developer</em>
+      </h1>
+      <p class="hero-desc">
+        Passionate about machine learning, data visualization, and building intelligent systems.
+        Turning complex problems into elegant code.
+      </p>
+      <div class="hero-btns">
+        <a href="#projects" class="btn btn-primary">View My Work</a>
+        <a href="#contact" class="btn btn-outline">Get in Touch</a>
+      </div>
+    </div>
+    <div class="scroll-hint">
+      <div class="scroll-line"></div>
+      SCROLL
+    </div>
+  </section>
+
+  <!-- Skills -->
+  <section id="skills">
+    <h2 class="section-title">Skills &amp; Tools</h2>
+    <div class="skills-grid">
+      <div class="skill-card reveal">
+        <div class="skill-icon">🤖</div>
+        <h3>Machine Learning</h3>
+        <div class="skill-tags">
+          <span class="tag">Python</span>
+          <span class="tag">scikit-learn</span>
+          <span class="tag">TensorFlow</span>
+          <span class="tag">NumPy</span>
+        </div>
+      </div>
+      <div class="skill-card reveal">
+        <div class="skill-icon">📊</div>
+        <h3>Data Visualization</h3>
+        <div class="skill-tags">
+          <span class="tag">Matplotlib</span>
+          <span class="tag">Seaborn</span>
+          <span class="tag">Pandas</span>
+          <span class="tag">Plotly</span>
+        </div>
+      </div>
+      <div class="skill-card reveal">
+        <div class="skill-icon">💻</div>
+        <h3>Software Development</h3>
+        <div class="skill-tags">
+          <span class="tag">Python</span>
+          <span class="tag">Java</span>
+          <span class="tag">C</span>
+          <span class="tag">Git</span>
+        </div>
+      </div>
+      <div class="skill-card reveal">
+        <div class="skill-icon">🧠</div>
+        <h3>CS Fundamentals</h3>
+        <div class="skill-tags">
+          <span class="tag">DSA</span>
+          <span class="tag">System Design</span>
+          <span class="tag">OOP</span>
+          <span class="tag">Algorithms</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Projects -->
+  <section id="projects">
+    <h2 class="section-title">Projects</h2>
+    <div class="projects-grid">
+      <div class="project-card reveal">
+        <div class="project-num">01 — ML</div>
+        <h3>House Price Prediction using Regression Model</h3>
+        <p>This project aims to build a machine learning model that predicts residential property prices based on key housing features. The goal is to assist buyers, sellers, and real estate analysts in making data-driven pricing decisions.
+
+The model was trained on a housing dataset containing both numerical and categorical features, including location (latitude and longitude), median income, total rooms, total bedrooms, population, households, and ocean proximity. The target variable is the median house value.
+
+A complete data preprocessing pipeline was implemented using ColumnTransformer and Pipeline, which handled feature scaling with StandardScaler and encoding of categorical variables. Exploratory Data Analysis (EDA) was performed using visualizations such as heatmaps and box plots to identify correlations and detect outliers.
+
+The initial model was built using Linear Regression, and performance was improved through feature selection and outlier handling techniques. The model was evaluated using R² Score and Mean Squared Error (MSE) to measure prediction accuracy.
+
+The final model achieved an R² score of approximately 0.81, demonstrating a reasonable ability to capture trends in housing prices. This project highlights practical experience in data preprocessing, model building, and evaluation using machine learning workflows.</p>
+        <div class="project-footer">
+          <div class="skill-tags">
+            <span class="tag">Python</span>
+            <span class="tag">scikit-learn</span>
+          </div>
+          <a href="https://github.com/saidavali-shaik/my_project" class="project-link">View →</a>
+        </div>
+      </div>
+      <!--
+      <div class="project-card reveal">
+        <div class="project-num">02-web</div>
+        <h3>Software Project</h3>
+        <p>Describe another project — a web app, tool, or algorithm implementation you're proud of.</p>
+        <div class="project-footer">
+          <div class="skill-tags">
+            <span class="tag">Python</span>
+            <span class="tag">GitHub</span>
+          </div>
+          <a href="#" class="project-link">View →</a>
+        </div>
+      </div> -->
+    </div>
+  </section>
+
+  <!-- Certificates -->
+  <section id="certificates">
+    <h2 class="section-title">Certificates</h2>
+    <div class="certificates-grid">
+      <div class="certificate-card reveal">
+        <img src="https://drive.google.com/file/d/1S-n65F35mYhtmh7MFEVQLNNtLTlFACzD/view?usp=drivesdk" alt="Machine Learning Certificate" class="certificate-image">
+        <h3>Machine Learning Specialization</h3>
+        <div class="certificate-issuer">Internshala Trainings</div>
+        <div class="certificate-date">Issued: April 2026</div>
+        <a href="https://drive.google.com/file/d/1S-n65F35mYhtmh7MFEVQLNNtLTlFACzD/view?usp=drivesdk" class="certificate-link" target="_blank">View Certificate →</a>
+      </div>
+      <div class="certificate-card reveal">
+        <img src="https://drive.google.com/file/d/1YxVBuZfAZ_aq0v5SJzU-wYL8pCf2mCeA/view?usp=drivesdk" alt="Data structure and Algorithms Certificate" class="certificate-image">
+        <h3>Data structure and Algorithms</h3>
+        <div class="certificate-issuer">NPTEL - swayam</div>
+        <div class="certificate-date">Issued: April 2026</div>
+        <a href="https://drive.google.com/file/d/1YxVBuZfAZ_aq0v5SJzU-wYL8pCf2mCeA/view?usp=drivesdk" class="certificate-link" target="_blank">View Certificate →</a>
+      </div>
+      <div class="certificate-card reveal">
+        <img src="https://drive.google.com/file/d/1A7vUXMYXx7mo06IFaE7RmMll-_A0b6Zv/view?usp=drivesdk" alt="Python Certificate" class="certificate-image">
+        <h3>Python</h3>
+        <div class="certificate-issuer">kaggle - Microsoft</div>
+        <div class="certificate-date">Issued: May 2025</div>
+        <a href="https://drive.google.com/file/d/1A7vUXMYXx7mo06IFaE7RmMll-_A0b6Zv/view?usp=drivesdk" class="certificate-link" target="_blank">View Certificate →</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- About -->
+  <section id="about">
+    <div class="about-grid">
+      <div class="about-text reveal">
+        <h2 class="section-title">About Me</h2>
+        <p>
+          I'm <strong>Saidavali Shaik</strong>, a passionate software engineering student with a deep interest in machine learning and intelligent systems.
+        </p>
+        <p>
+          I enjoy working on <strong>real-world problems</strong> — from building ML models to crafting clean, efficient code. Currently preparing for technical internships and actively expanding my skills in AI/ML.
+        </p>
+        <p>
+          When I'm not coding, I'm exploring new algorithms, reading about AI research, or experimenting with data visualization tools.
+        </p>
+      </div>
+      <div class="stats reveal">
+        <div class="stat-box">
+          <span class="stat-num">3+</span>
+          <span class="stat-label">Projects Built</span>
+        </div>
+        <div class="stat-box">
+          <span class="stat-num">5+</span>
+          <span class="stat-label">Technologies</span>
+        </div>
+        <div class="stat-box">
+          <span class="stat-num">∞</span>
+          <span class="stat-label">Curiosity</span>
+        </div>
+        <div class="stat-box">
+          <span class="stat-num">1</span>
+          <span class="stat-label">Goal: Impact</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact -->
+  <section id="contact">
+    <div class="contact-inner">
+      <h2 class="section-title">Get In Touch</h2>
+      <p>I'm actively looking for internship opportunities. Whether you have a project, an opportunity, or just want to say hi — my inbox is open!</p>
+      <div class="contact-links">
+        <a href="mailto:saidavalishaik183@gmail.com" class="contact-link">
+          📧 Email Me
+        </a>
+        <a href="https://github.com/saidavali-shaik" target="_blank" class="contact-link">
+          🐙 GitHub
+        </a>
+        <a href="https://linkedin.com/in/your-profile" target="_blank" class="contact-link">
+          💼 LinkedIn
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <p>© 2026 Saidavali Shaik — Built with passion &amp; curiosity</p>
+  </footer>
+
+  <script>
+    // Scroll reveal
+    const reveals = document.querySelectorAll('.reveal');
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry, i) => {
+        if (entry.isIntersecting) {
+          setTimeout(() => entry.target.classList.add('visible'), i * 100);
+        }
+      });
+    }, { threshold: 0.1 });
+    reveals.forEach(el => observer.observe(el));
+
+    // Smooth nav highlight
+    const sections = document.querySelectorAll('section[id]');
+    const navLinks = document.querySelectorAll('.nav-links a');
+    window.addEventListener('scroll', () => {
+      let current = '';
+      sections.forEach(s => {
+        if (window.scrollY >= s.offsetTop - 100) current = s.id;
+      });
+      navLinks.forEach(a => {
+        a.style.color = a.getAttribute('href') === `#${current}` ? 'var(--accent)' : '';
+      });
+    });
+  </script>
+</body>
+</html>
